@@ -60,7 +60,9 @@ class BeerViewModel @Inject constructor(
                     .onFailure {
                         _uiState.update { state.copy(loading = false) }
                         it.printStackTrace()
-                        // todo
+                        it.message?.let {
+                            _errorFlow.emit(it)
+                        }
                     }
             }
         }
